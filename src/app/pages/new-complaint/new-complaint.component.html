@@ -1,0 +1,195 @@
+<head>
+    <style>
+        /* Background and container styling */
+        body, .vh-100 {
+            background: linear-gradient(135deg, #e0f7fa, #80deea);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .h-custom {
+            height: auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 1100px; /* Sets the total width */
+            margin: auto;
+        }
+
+        /* Form column styling to take up more width */
+        .form-column {
+            width: 65%; /* Explicitly setting form width */
+        }
+
+        /* Divider styling */
+        .divider {
+            position: relative;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .divider h3 {
+            font-size: 24px;
+            color: #00796b;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+            padding: 0 10px;
+            background: #ffffff;
+            z-index: 1;
+        }
+
+        .divider:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: #e0e0e0;
+            z-index: 0;
+        }
+
+        /* Input styling */
+        .form-outline {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .form-control, .form-select {
+            height: 40px;
+            padding: 0 12px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            background: #f5f5f5;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #00796b;
+            outline: none;
+            background: #ffffff;
+        }
+
+        label.form-label {
+            font-size: 14px;
+            color: #555555;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* Checkbox styling */
+        .form-check-input {
+            accent-color: #00796b;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background-color: #00796b;
+            border: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 10px 30px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #004d40;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .h-custom {
+                padding: 15px;
+            }
+
+            /* Hide image on smaller screens */
+            .img-column {
+                display: none;
+            }
+
+            .form-column {
+                width: 100%; /* Form takes full width on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row h-100 align-items-center">
+            <!-- Image on the left side -->
+            <div class="col-md-5 img-column d-none d-md-block">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid" alt="Sample image" style="border-radius: 12px; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+            
+            <!-- Form on the right side with larger width -->
+            <div class="col-md-7 form-column">
+                <div class="divider">
+                    <h3>New Complaint</h3>
+                </div>
+                <form>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-outline">
+                                <select name="department" id="department" class="form-select">
+                                    <option value="">Select</option>
+                                </select>
+                                <label class="form-label" for="department">Department</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-outline">
+                                <select name="sub-department" id="sub-department" class="form-select">
+                                    <option value="">Select</option>
+                                </select>
+                                <label class="form-label" for="sub-department">Sub Department</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-outline">
+                        <input type="text" id="complaint-title" class="form-control" />
+                        <label class="form-label" for="complaint-title">Complaint Title</label>
+                    </div>
+
+                    <div class="form-outline">
+                        <textarea id="complaint-details" placeholder="Enter Complaint Details" class="form-control"></textarea>
+                        <label class="form-label" for="complaint-details">Details</label>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-8">
+                            <div class="form-check">
+                                <input class="form-check-input me-2" type="checkbox" id="complaint-raised" />
+                                <label class="form-check-label" for="complaint-raised">
+                                    Have you already raised a complaint for this?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-outline">
+                                <input type="text" id="old-ticket-no" class="form-control" placeholder="" readonly />
+                                <label class="form-label" for="old-ticket-no">Old Ticket No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button type="button" class="btn btn-primary">
+                            Create
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

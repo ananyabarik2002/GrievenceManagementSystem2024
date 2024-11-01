@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+.divider-after,
+.divide-before{
+    content: "";
+    flex:1;
+    height:1px;
+    background:#eee;
+
+}
+.h-custom{
+    height:calc(73px);
+}
+@media(max-width:450px){
+    .h-custom{
+        height:100%;
+    }
+}
