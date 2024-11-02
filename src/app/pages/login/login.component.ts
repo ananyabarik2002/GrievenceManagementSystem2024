@@ -11,8 +11,20 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent {
   isLogin: boolean = true;
+  isAdminLogin: boolean = false;
 
   toggleForm() {
     this.isLogin = !this.isLogin;
+    this.isAdminLogin = false;
+  }
+
+  switchToAdminLogin() {
+    this.isAdminLogin = true;
+    this.isLogin = false;
+  }
+
+  switchToUserLogin() {
+    this.isAdminLogin = false;
+    this.isLogin = true;
   }
 }
