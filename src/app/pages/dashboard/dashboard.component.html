@@ -1,1 +1,50 @@
-<p>dashboard works!</p>
+<div class="container mt-4">
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <h2>Welcome, {{ userName }}!</h2>
+      </div>
+    </div>
+  
+    <!-- Complaint Summary -->
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card p-4 shadow-sm">
+          <h4 class="text-primary">Total Complaints</h4>
+          <p class="display-4">{{ totalComplaints }}</p>
+        </div>
+      </div>
+  
+      <div class="col-md-6 mb-4">
+        <div class="card p-4 shadow-sm">
+          <h4 class="text-primary">Feedback</h4>
+          <button class="btn btn-primary mt-2" (click)="openFeedback()">Leave Feedback</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Complaint List -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card shadow-sm p-4">
+          <h4 class="text-primary">Your Complaints</h4>
+          <ul class="list-group list-group-flush mt-3">
+            <li
+              *ngFor="let complaint of complaints"
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              {{ complaint.title }}
+              <span class="badge badge-secondary badge-pill">{{ complaint.status }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <!-- New Complaint Button -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <button class="btn btn-success btn-lg" (click)="redirectToNewComplaint()">+ New Complaint</button>
+      </div>
+    </div>
+  </div>
+  

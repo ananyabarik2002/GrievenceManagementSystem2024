@@ -4,7 +4,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NewComplaintComponent } from './pages/new-complaint/new-complaint.component';
 import { ComplaintListComponent } from './pages/complaint-list/complaint-list.component';
 import { DepartmentComponent } from './pages/department/department.component';
-import { LayoutComponent } from './pages/layout/layout.component'; // Assuming LayoutComponent is in this path
+import { LayoutComponent } from './pages/layout/layout.component';
 
 export const routes: Routes = [
     {
@@ -37,5 +37,9 @@ export const routes: Routes = [
                 component: DepartmentComponent
             }
         ]
+    },
+    {
+        path: '**',
+        redirectTo: 'login'
     }
 ];
