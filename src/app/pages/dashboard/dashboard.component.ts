@@ -1,33 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { ComplaintService } from '../../services/complaint.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  userName: string = 'John Doe'; // Replace with dynamic data from API
-  totalComplaints: number = 5; // Replace with dynamic data from API
-  complaints = [
-    { title: 'Complaint 1', status: 'Resolved' },
-    { title: 'Complaint 2', status: 'Pending' },
-    { title: 'Complaint 3', status: 'In Progress' },
-    // Add more as needed
-  ];
+  userName: string = '';
+  totalComplaints: number = 0;
+  complaints: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private complaintService: ComplaintService
+  ) {}
 
   ngOnInit(): void {
-    // Fetch user data, complaints, and total count from API
+    const userData = this.authService.getUserData();
+    this.userName = userData.userName || 'User';
+
+    // Check if userId is not null before calling the service
+    if (userData.userId) {
+      this.complaintService.getUserComplaints(userData.userId).subscribe(
+        response => {
+          this.complaints = response.complaints;
+          this.totalComplaints = response.totalCount;
+        },
+        error => {
+          console.error('Failed to load complaints', error);
+        }
+      );
+    } else {
+      console.error('User ID is null, cannot fetch complaints.');
+    }
   }
 
   redirectToNewComplaint(): void {
-    this.router.navigate(['/new-complaint']); // Navigate to the new complaint component
+    // Redirect to new complaint form
   }
 
   openFeedback(): void {
-    // Logic to open feedback form, could be a modal or a new route
     alert('Feedback form coming soon!');
   }
 }

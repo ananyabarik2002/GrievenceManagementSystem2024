@@ -7,39 +7,39 @@ import { DepartmentComponent } from './pages/department/department.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full'
-    },
-    {
-        path: 'login',
-        component: LoginComponent
-    },
-    {
-        path: 'layout',
-        component: LayoutComponent,
-        children: [
-            {
-                path: 'dashboard',
-                component: DashboardComponent
-            },
-            {
-                path: 'new-complaint',
-                component: NewComplaintComponent
-            },
-            {
-                path: 'complaint-list',
-                component: ComplaintListComponent
-            },
-            {
-                path: 'department',
-                component: DepartmentComponent
-            }
-        ]
-    },
-    {
-        path: '**',
-        redirectTo: 'login'
-    }
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'layout',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
+      {
+        path: 'new-complaint',
+        component: NewComplaintComponent,
+      },
+      {
+        path: 'complaint-list',
+        component: ComplaintListComponent,
+      },
+      {
+        path: 'department',
+        component: DepartmentComponent,
+      },
+    ],
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
+  },
 ];
