@@ -9,15 +9,14 @@
 
   <!-- Right Side: Form Container -->
   <div class="form-container">
-
     <!-- User Login Form -->
     <div *ngIf="isLogin && !isAdminLogin" class="login-form">
       <h2>Grievance Management System</h2>
       <p style="text-align: center; color: #666;">Please log in to access your account</p>
 
-      <form>
-        <input type="text" class="input-field" placeholder="Username" required>
-        <input type="password" class="input-field" placeholder="Password" required>
+      <form (ngSubmit)="onLoginSubmit()"> <!-- Updated with (ngSubmit) -->
+        <input type="text" class="input-field" placeholder="Username" [(ngModel)]="username" required name="username">
+        <input type="password" class="input-field" placeholder="Password" [(ngModel)]="password" required name="password">
         <button type="submit" class="btn-login">Login</button>
       </form>
 
@@ -33,12 +32,12 @@
       <h2>Register</h2>
       <p style="text-align: center; color: #666;">Create a new account</p>
 
-      <form>
-        <input type="text" class="input-field" placeholder="Full Name" required>
-        <input type="email" class="input-field" placeholder="Email" required>
-        <input type="text" class="input-field" placeholder="Username" required>
-        <input type="password" class="input-field" placeholder="Password" required>
-        <input type="password" class="input-field" placeholder="Confirm Password" required>
+      <form (ngSubmit)="onRegisterSubmit()">
+        <input type="text" class="input-field" placeholder="Full Name" [(ngModel)]="registerFullName" required name="fullName">
+        <input type="email" class="input-field" placeholder="Email" [(ngModel)]="registerEmail" required name="email">
+        <input type="text" class="input-field" placeholder="Username" [(ngModel)]="registerUsername" required name="username">
+        <input type="password" class="input-field" placeholder="Password" [(ngModel)]="registerPassword" required name="password">
+        <input type="password" class="input-field" placeholder="Confirm Password" [(ngModel)]="registerConfirmPassword" required name="confirmPassword">
         <button type="submit" class="btn-login">Register</button>
         <button type="button" class="btn-small-register" (click)="toggleForm()">Back to Login</button>
       </form>
@@ -49,9 +48,9 @@
       <h2>Admin Login</h2>
       <p style="text-align: center; color: #666;">Please log in to access the admin dashboard</p>
 
-      <form>
-        <input type="text" class="input-field" placeholder="Admin Username" required>
-        <input type="password" class="input-field" placeholder="Admin Password" required>
+      <form (ngSubmit)="onAdminLoginSubmit()">
+        <input type="text" class="input-field" placeholder="Admin Username" [(ngModel)]="adminUsername" required name="adminUsername">
+        <input type="password" class="input-field" placeholder="Admin Password" [(ngModel)]="adminPassword" required name="adminPassword">
         <button type="submit" class="btn-login">Login</button>
         <button type="button" class="btn-small-register" (click)="switchToUserLogin()">Back to User Login</button>
       </form>
