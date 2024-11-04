@@ -1,0 +1,22 @@
+<div class="dashboard">
+    <aside class="sidebar">
+      <h3>Departments</h3>
+      <ul>
+        <li *ngFor="let department of departments" (click)="selectDepartment(department)">
+          {{ department.name }}
+        </li>
+      </ul>
+    </aside>
+  
+    <section class="content">
+      <h3 *ngIf="selectedDepartment">Complaints for {{ selectedDepartment.name }}</h3>
+      <ul *ngIf="selectedComplaints?.length; else noComplaints">
+        <li *ngFor="let complaint of selectedComplaints">
+          <strong>{{ complaint.title }}</strong>: {{ complaint.description }}
+        </li>
+      </ul>
+      <ng-template #noComplaints>
+        <p>No complaints available for this department.</p>
+      </ng-template>
+    </section>
+  </div>
