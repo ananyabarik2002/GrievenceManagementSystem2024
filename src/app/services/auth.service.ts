@@ -1,3 +1,4 @@
+// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -11,21 +12,51 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  // User login method
   login(username: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { username, password }).pipe(
-      catchError(error => {
+      catchError((error: any) => {
         console.error('Login error', error);
         return throwError(() => new Error('Login failed, please try again.'));
       })
     );
   }
 
+  // Save user data to local storage
   saveUserData(response: any) {
     localStorage.setItem('token', response.token);
     localStorage.setItem('userName', response.userName);
     localStorage.setItem('userId', response.userId);
   }
 
+  // Admin login method
+  adminLogin(adminUsername: string, adminPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/admin-login`, { adminUsername, adminPassword }).pipe(
+      catchError((error: any) => {
+        console.error('Admin login error', error);
+        return throwError(() => new Error('Admin login failed, please try again.'));
+      })
+    );
+  }
+
+  // Save admin data to local storage
+  saveAdminData(response: any) {
+    localStorage.setItem('adminToken', response.token);
+    localStorage.setItem('adminName', response.adminName);
+    localStorage.setItem('adminId', response.adminId);
+  }
+
+  // User registration method
+  register(userData: { fullName: string; email: string; username: string; password: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, userData).pipe(
+      catchError((error: any) => {
+        console.error('Registration error', error);
+        return throwError(() => new Error('Registration failed, please try again.'));
+      })
+    );
+  }
+
+  // Retrieve user data
   getUserData() {
     return {
       userName: localStorage.getItem('userName') || '',
@@ -33,9 +64,25 @@ export class AuthService {
     };
   }
 
+  // Retrieve admin data
+  getAdminData() {
+    return {
+      adminName: localStorage.getItem('adminName') || '',
+      adminId: localStorage.getItem('adminId') || ''
+    };
+  }
+
+  // User logout
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
     localStorage.removeItem('userId');
+  }
+
+  // Admin logout
+  adminLogout() {
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminName');
+    localStorage.removeItem('adminId');
   }
 }

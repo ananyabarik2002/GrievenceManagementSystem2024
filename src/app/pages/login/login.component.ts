@@ -1,3 +1,4 @@
+// src/app/pages/login/login.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -47,11 +48,11 @@ export class LoginComponent {
 
   onLoginSubmit() {
     this.authService.login(this.username, this.password).subscribe(
-      response => {
+      (response: any) => {
         this.authService.saveUserData(response); // Save user data upon successful login
         this.router.navigate(['/layout/dashboard']); // Redirect to user dashboard
       },
-      error => {
+      (error: any) => {
         console.error('Login failed', error); // Log error to console
         alert('Invalid credentials');           // Alert user for invalid login
       }
@@ -60,11 +61,11 @@ export class LoginComponent {
 
   onAdminLoginSubmit() {
     this.authService.adminLogin(this.adminUsername, this.adminPassword).subscribe(
-      response => {
+      (response: any) => {
         this.authService.saveAdminData(response); // Save admin data upon successful login
         this.router.navigate(['/layout/admin-dashboard']); // Redirect to admin dashboard
       },
-      error => {
+      (error: any) => {
         console.error('Admin login failed', error); // Log error to console
         alert('Invalid admin credentials');          // Alert user for invalid admin login
       }
@@ -83,11 +84,11 @@ export class LoginComponent {
       username: this.registerUsername,
       password: this.registerPassword
     }).subscribe(
-      response => {
+      (response: any) => {
         alert('Registration successful!'); // Alert on successful registration
         this.toggleForm();                 // Switch back to login form after registration
       },
-      error => {
+      (error: any) => {
         console.error('Registration failed', error); // Log error to console
         alert('Registration failed. Please try again.'); // Alert user for registration failure
       }
