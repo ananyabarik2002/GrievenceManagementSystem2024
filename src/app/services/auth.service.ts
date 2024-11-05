@@ -1,6 +1,6 @@
 // src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -14,32 +14,35 @@ export class AuthService {
 
   // User login method
   login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { username, password }).pipe(
+    const headers = new HttpHeaders().set('Content-Type', 'application/json'); // Explicitly setting headers
+
+    return this.http.post(`${this.apiUrl}/login`, { username, password }, { headers }).pipe(
       catchError((error: any) => {
-        console.error('Login error', error);
+        console.error('Login error details:', error); // Logging detailed error for debugging
         return throwError(() => new Error('Login failed, please try again.'));
       })
     );
   }
 
-  // Save user data to local storage
+  // Admin login method
+  adminLogin(adminUsername: string, adminPassword: string): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.post(`${this.apiUrl}/admin-login`, { adminUsername, adminPassword }, { headers }).pipe(
+      catchError((error: any) => {
+        console.error('Admin login error details:', error);
+        return throwError(() => new Error('Admin login failed, please try again.'));
+      })
+    );
+  }
+
+  // Save user and admin data to local storage
   saveUserData(response: any) {
     localStorage.setItem('token', response.token);
     localStorage.setItem('userName', response.userName);
     localStorage.setItem('userId', response.userId);
   }
 
-  // Admin login method
-  adminLogin(adminUsername: string, adminPassword: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/admin-login`, { adminUsername, adminPassword }).pipe(
-      catchError((error: any) => {
-        console.error('Admin login error', error);
-        return throwError(() => new Error('Admin login failed, please try again.'));
-      })
-    );
-  }
-
-  // Save admin data to local storage
   saveAdminData(response: any) {
     localStorage.setItem('adminToken', response.token);
     localStorage.setItem('adminName', response.adminName);

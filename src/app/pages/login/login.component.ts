@@ -1,97 +1,105 @@
 // src/app/pages/login/login.component.ts
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  standalone: true, // Mark this component as standalone
-  imports: [FormsModule, CommonModule] // Import FormsModule here for ngModel binding
 })
 export class LoginComponent {
-  isLogin: boolean = true;               // Controls user login view
-  isAdminLogin: boolean = false;         // Controls admin login view
-  username: string = '';                  // User's username
-  password: string = '';                  // User's password
+  username = '';
+  password = '';
+  adminUsername = '';
+  adminPassword = '';
+  registerFullName = '';
+  registerEmail = '';
+  registerUsername = '';
+  registerPassword = '';
+  registerConfirmPassword = '';
+  isLogin = true;
+  isAdminLogin = false;
+  errorMessage: string | null = null;
 
-  // Admin Login Fields
-  adminUsername: string = '';             // Admin's username
-  adminPassword: string = '';             // Admin's password
+  constructor(private authService: AuthService) {}
 
-  // Registration Fields
-  registerFullName: string = '';          // Full name for registration
-  registerEmail: string = '';             // Email for registration
-  registerUsername: string = '';          // Username for registration
-  registerPassword: string = '';          // Password for registration
-  registerConfirmPassword: string = '';   // Confirm password for registration
-
-  constructor(private authService: AuthService, private router: Router) {}
-
-  toggleForm() {
-    this.isLogin = !this.isLogin;         // Toggle between login and registration
-    this.isAdminLogin = false;            // Ensure admin login is hidden when toggling
-  }
-
-  switchToAdminLogin() {
-    this.isAdminLogin = true;             // Switch to admin login view
-    this.isLogin = false;                 // Ensure user login is hidden
-  }
-
-  switchToUserLogin() {
-    this.isAdminLogin = false;            // Switch to user login view
-    this.isLogin = true;                  // Ensure user login is visible
-  }
-
+  // For user login
   onLoginSubmit() {
     this.authService.login(this.username, this.password).subscribe(
-      (response: any) => {
-        this.authService.saveUserData(response); // Save user data upon successful login
-        this.router.navigate(['/layout/dashboard']); // Redirect to user dashboard
+      (response) => {
+        console.log('User login successful:', response);
+        this.authService.saveUserData(response);
+        this.errorMessage = null; // Clear any previous error message
       },
-      (error: any) => {
-        console.error('Login failed', error); // Log error to console
-        alert('Invalid credentials');           // Alert user for invalid login
+      (error) => {
+        console.error('User login failed:', error);
+        this.errorMessage = 'Login failed. Please check your credentials.';
       }
     );
   }
 
+  // For admin login
   onAdminLoginSubmit() {
     this.authService.adminLogin(this.adminUsername, this.adminPassword).subscribe(
-      (response: any) => {
-        this.authService.saveAdminData(response); // Save admin data upon successful login
-        this.router.navigate(['/layout/admin-dashboard']); // Redirect to admin dashboard
+      (response) => {
+        console.log('Admin login successful:', response);
+        this.authService.saveAdminData(response);
+        this.errorMessage = null; // Clear any previous error message
       },
-      (error: any) => {
-        console.error('Admin login failed', error); // Log error to console
-        alert('Invalid admin credentials');          // Alert user for invalid admin login
+      (error) => {
+        console.error('Admin login failed:', error);
+        this.errorMessage = 'Admin login failed. Please check your credentials.';
       }
     );
   }
 
+  // For registration
   onRegisterSubmit() {
     if (this.registerPassword !== this.registerConfirmPassword) {
-      alert('Passwords do not match!'); // Alert if passwords do not match
+      this.errorMessage = 'Passwords do not match.';
       return;
     }
 
-    this.authService.register({
+    const userData = {
       fullName: this.registerFullName,
       email: this.registerEmail,
       username: this.registerUsername,
-      password: this.registerPassword
-    }).subscribe(
-      (response: any) => {
-        alert('Registration successful!'); // Alert on successful registration
-        this.toggleForm();                 // Switch back to login form after registration
+      password: this.registerPassword,
+    };
+
+    this.authService.register(userData).subscribe(
+      (response) => {
+        console.log('Registration successful:', response);
+        this.errorMessage = null; 
       },
-      (error: any) => {
-        console.error('Registration failed', error); // Log error to console
-        alert('Registration failed. Please try again.'); // Alert user for registration failure
+      (error) => {
+        console.error('Registration failed:', error);
+        this.errorMessage = 'Registration failed. Please try again.';
       }
     );
+  }
+
+  // Toggle between user and admin login
+  switchToAdminLogin() {
+    this.isAdminLogin = true;
+    this.isLogin = false;
+    this.errorMessage = null;
+  }
+
+  switchToUserLogin() {
+    this.isAdminLogin = false;
+    this.isLogin = true;
+    this.errorMessage = null;
+  }
+
+  // Toggle registration form
+  toggleForm() {
+    this.isLogin = !this.isLogin;
+    this.isAdminLogin = false;
+    this.errorMessage = null;
   }
 }
