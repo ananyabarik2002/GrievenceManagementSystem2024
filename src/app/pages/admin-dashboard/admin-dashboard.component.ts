@@ -28,8 +28,8 @@ export class AdminDashboardComponent {
 
   selectDepartment(department: { id: number; name: string }): void {
     this.selectedDepartment = department;
-    this.selectedComplaints = this.complaints.filter(
-      complaint => complaint.departmentId === department.id
-    );
+    // this.selectedComplaints = this.complaints.filter(
+    //   complaint => complaint.departmentId === department.id
+    // );
   }
 }
