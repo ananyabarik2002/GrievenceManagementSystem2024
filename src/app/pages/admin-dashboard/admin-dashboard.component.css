@@ -58,12 +58,21 @@ body {
 .sidebar .logout {
   text-align: center;
   padding: 20px;
-  background-color: #E74C3C;
 }
 
-.sidebar .logout a {
+.sidebar .logout button {
+  background-color: #E74C3C;
   color: white;
-  text-decoration: none;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar .logout button:hover {
+  background-color: #c0392b;
 }
 
 /* Main Content Styles */
@@ -110,7 +119,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 30%;
-  height: 150px; /* To make the card square */
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -34,15 +34,15 @@ export const routes: Routes = [
         path: 'complaint-list',
         component: ComplaintListComponent,
       },
-      {
-        path: 'department',
-        component: DepartmentComponent,
-      },
     ],
   },
   {
     path: 'admin-dashboard', // Define the route for Admin Dashboard
     component: AdminDashboardComponent,
+  },
+  {
+    path: 'department',
+    component: DepartmentComponent,
   },
   {
     path: '**',
