@@ -37,12 +37,17 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'admin-dashboard', // Define the route for Admin Dashboard
+    path: 'admin-dashboard',
     component: AdminDashboardComponent,
   },
   {
+<<<<<<< HEAD
     path: 'department',
     component: DepartmentComponent,
+=======
+    path:'department',
+    component:DepartmentComponent
+>>>>>>> af0c0e32563b48ca0d819bd5ab0d4a40bc0ebb61
   },
   {
     path: '**',

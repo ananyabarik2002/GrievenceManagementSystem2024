@@ -2,11 +2,15 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-department',
-  standalone: true,
-  imports: [],
   templateUrl: './department.component.html',
-  styleUrl: './department.component.css'
+  styleUrls: ['./department.component.css']
 })
 export class DepartmentComponent {
-
+  departments = [
+    { name: 'Security' },
+    { name: 'Transport' },
+    { name: 'IT Services' },
+    { name: 'Housing' },
+    { name: 'Student Affairs' }
+  ];
 }

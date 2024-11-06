@@ -43,6 +43,7 @@ export class AdminDashboardComponent {
   selectedDepartment?: Department;
   selectedComplaints: Complaint[] = [];
 
+<<<<<<< HEAD
   constructor(private router: Router) {}
 
   selectDepartment(department: Department): void {
@@ -59,4 +60,14 @@ export class AdminDashboardComponent {
   redirectToDepartment(): void {
     this.router.navigate(['/department']);
   }
+=======
+    selectDepartment(department: Department): void {
+        this.selectedDepartment = department;
+        this.selectedComplaints = this.complaints.filter(
+            complaint => complaint.departmentId === department.id
+        );
+    }
+
+    
+>>>>>>> af0c0e32563b48ca0d819bd5ab0d4a40bc0ebb61
 }
