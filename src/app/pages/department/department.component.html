@@ -1,5 +1,8 @@
-<div class="department-dashboard">
-  <div *ngFor="let dept of departments" class="department-circle">
-    <span>{{ dept.name }}</span>
+<div class="page-container">
+  <h1 class="department-heading">Departments</h1>
+  <div class="department-dashboard">
+    <div *ngFor="let dept of departments" class="department-card">
+      <span class="department-name">{{ dept.name }}</span>
+    </div>
   </div>
 </div>
