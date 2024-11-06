@@ -1,5 +1,6 @@
 // src/app/pages/login/login.component.ts
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'; // Import Router
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -25,7 +26,7 @@ export class LoginComponent {
   isAdminLogin = false;
   errorMessage: string | null = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {} // Inject Router
 
   // For user login
   onLoginSubmit() {
@@ -33,7 +34,7 @@ export class LoginComponent {
       (response) => {
         console.log('User login successful:', response);
         this.authService.saveUserData(response);
-        this.errorMessage = null; // Clear any previous error message
+        this.errorMessage = null;
       },
       (error) => {
         console.error('User login failed:', error);
@@ -42,19 +43,16 @@ export class LoginComponent {
     );
   }
 
-  // For admin login
+  // Direct check for admin login with hardcoded credentials
   onAdminLoginSubmit() {
-    this.authService.adminLogin(this.adminUsername, this.adminPassword).subscribe(
-      (response) => {
-        console.log('Admin login successful:', response);
-        this.authService.saveAdminData(response);
-        this.errorMessage = null; // Clear any previous error message
-      },
-      (error) => {
-        console.error('Admin login failed:', error);
-        this.errorMessage = 'Admin login failed. Please check your credentials.';
-      }
-    );
+    if (this.adminUsername === 'admin' && this.adminPassword === '1234') {
+      console.log('Admin login successful');
+      this.errorMessage = null;
+      this.router.navigate(['/admin-dashboard']); // Navigate to admin dashboard
+    } else {
+      console.error('Admin login failed');
+      this.errorMessage = 'Admin login failed. Please check your credentials.';
+    }
   }
 
   // For registration
@@ -74,7 +72,7 @@ export class LoginComponent {
     this.authService.register(userData).subscribe(
       (response) => {
         console.log('Registration successful:', response);
-        this.errorMessage = null; 
+        this.errorMessage = null;
       },
       (error) => {
         console.error('Registration failed:', error);
