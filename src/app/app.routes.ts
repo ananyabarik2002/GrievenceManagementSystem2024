@@ -41,8 +41,12 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'admin-dashboard', // Define the route for Admin Dashboard
+    path: 'admin-dashboard',
     component: AdminDashboardComponent,
+  },
+  {
+    path:'department',
+    component:DepartmentComponent
   },
   {
     path: '**',

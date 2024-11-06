@@ -47,4 +47,6 @@ export class AdminDashboardComponent {
             complaint => complaint.departmentId === department.id
         );
     }
+
+    
 }
