@@ -34,6 +34,10 @@ export const routes: Routes = [
         path: 'complaint-list',
         component: ComplaintListComponent,
       },
+      {
+        path: 'department',
+        component: DepartmentComponent,
+      },
     ],
   },
   {
@@ -41,13 +45,8 @@ export const routes: Routes = [
     component: AdminDashboardComponent,
   },
   {
-<<<<<<< HEAD
-    path: 'department',
-    component: DepartmentComponent,
-=======
     path:'department',
     component:DepartmentComponent
->>>>>>> af0c0e32563b48ca0d819bd5ab0d4a40bc0ebb61
   },
   {
     path: '**',

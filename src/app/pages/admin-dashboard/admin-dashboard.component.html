@@ -13,12 +13,14 @@
         <h2>Grievance System</h2>
         <ul>
             <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+            <li><a routerLink="/submit-grievance" routerLinkActive="active">Submit Grievance</a></li>
             <li><a routerLink="/view-grievances" routerLinkActive="active">View Grievances</a></li>
-            <li><a routerLink="/customer-feedback" routerLinkActive="active">Customer Feedback</a></li>
-            <li><a routerLink="/management-department" routerLinkActive="active">Management Department</a></li>
+            <li><a routerLink="/track-status" routerLinkActive="active">Track Status</a></li>
+            <li><a routerLink="/profile" routerLinkActive="active">User Profile</a></li>
+            <li><a routerLink="/support" routerLinkActive="active">Support</a></li>
         </ul>
         <div class="logout">
-            <button (click)="redirectToLogin()">Logout</button>
+            <a routerLink="/login">Logout</a>
         </div>
     </div>
 
@@ -49,13 +51,8 @@
 
         <!-- Department Button -->
         <div class="department-btn">
-<<<<<<< HEAD
-            <button (click)="redirectToDepartment()">Go to Department Dashboard</button>
-        </div>
-=======
           <a routerLink="/department-dashboard">Go to Department Dashboard</a>
       </div>
->>>>>>> af0c0e32563b48ca0d819bd5ab0d4a40bc0ebb61
     </div>
 </div>
 
