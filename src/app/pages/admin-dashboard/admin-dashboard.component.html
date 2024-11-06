@@ -1,22 +1,60 @@
-<div class="dashboard">
-    <aside class="sidebar">
-      <h3>Departments</h3>
-      <ul>
-        <li *ngFor="let department of departments" (click)="selectDepartment(department)">
-          {{ department.name }}
-        </li>
-      </ul>
-    </aside>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grievance Management System - Dashboard</title>
+</head>
+<body>
 
-    <section class="content">
-      <h3 *ngIf="selectedDepartment">Complaints for {{ selectedDepartment.name }}</h3>
-      <ul *ngIf="selectedComplaints?.length; else noComplaints">
-        <li *ngFor="let complaint of selectedComplaints">
-          <!-- <strong>{{ complaint.title }}</strong>: {{ complaint.description }} -->
-        </li>
-      </ul>
-      <ng-template #noComplaints>
-        <p>No complaints available for this department.</p>
-      </ng-template>
-    </section>
-  </div>
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Grievance System</h2>
+        <ul>
+            <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+            <li><a routerLink="/submit-grievance" routerLinkActive="active">Submit Grievance</a></li>
+            <li><a routerLink="/view-grievances" routerLinkActive="active">View Grievances</a></li>
+            <li><a routerLink="/track-status" routerLinkActive="active">Track Status</a></li>
+            <li><a routerLink="/profile" routerLinkActive="active">User Profile</a></li>
+            <li><a routerLink="/support" routerLinkActive="active">Support</a></li>
+        </ul>
+        <div class="logout">
+            <a routerLink="/login">Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="main-header">
+            <h1 id="DashboardTitle">DASHBOARD</h1>
+            <div class="profile">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTagAUI2PiSNsfW-nF3bM8SmhNtuKw3WWOAQQ&s" alt="Profile">
+            </div>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="dashboard">
+            <div class="card">
+                <h3>Total Grievances</h3>
+                <p>{{ totalGrievances }}</p>
+            </div>
+            <div class="card">
+                <h3>Pending Grievances</h3>
+                <p>{{ pendingGrievances }}</p>
+            </div>
+            <div class="card">
+                <h3>Resolved Grievances</h3>
+                <p>{{ resolvedGrievances }}</p>
+            </div>
+        </div>
+
+        <!-- Department Button -->
+        <div class="department-btn">
+            <a routerLink="/department-dashboard">Go to Department Dashboard</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
